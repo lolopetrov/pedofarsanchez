@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PEDOFARSÁNCHEZ – Protesta Memética</title>
+<style>
+  body { font-family: Arial; text-align:center; background:#111; color:white; padding:40px; }
+  #contador { font-size: 2rem; margin-top:20px; }
+  input, button { padding:10px; font-size:1rem; margin:5px; }
+  #msg { margin-top:15px; color:#0f0; }
+  #err { margin-top:15px; color:#f33; }
+</style>
+</head>
+<body>
+
+<h1>El Despresidente del Desgobierno de Esepeña</h1>
+<p>Protesta pacífica, irónica y memética.</p>
+
+<img src="pedofarsanchez.png" alt="meme" style="width:300px;margin:20px">
+
+<h2>Deja tu protesta</h2>
+<p>Cada email válido suma un Pedo global.</p>
+
+<input type="email" id="email" placeholder="Introduce email válido">
+<button onclick="enviar()">Enviar</button>
+
+<div id="contador">Pedo número: ...</div>
+<div id="msg"></div>
+<div id="err"></div>
+
+<script>
+async function cargarContador() {
+  const r = await fetch("/api/contador");
+  const d = await r.json();
+  document.getElementById("contador").innerText = "Pedo número: " + d.contador;
+}
+
+async function enviar() {
+  const email = document.getElementById("email").value;
+  document.getElementById("msg").innerHTML = "";
+  document.getElementById("err").innerHTML = "";
+
+  const r = await fetch("/api/pedo", {
+    method: "POST",
+    headers: { "Content-Type":"application/json" },
+    body: JSON.stringify({ email })
+  });
+
+  const d = await r.json();
+
+  if (d.error) {
+    document.getElementById("err").innerText = d.error;
+  } else {
+    document.getElementById("msg").innerText = "¡Protesta registrada!";
+    cargarContador();
+  }
+
+  document.getElementById("email").value = "";
+}
+
+cargarContador();
+</script>
+
+</body>
+</html>
