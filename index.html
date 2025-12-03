@@ -31,7 +31,7 @@
 
 <script>
 async function cargarContador() {
-  const r = await fetch("/api/contador");
+  const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
   const d = await r.json();
   document.getElementById("contador").innerText = "Pedo número: " + d.contador;
 }
@@ -41,11 +41,12 @@ async function enviar() {
   document.getElementById("msg").innerHTML = "";
   document.getElementById("err").innerHTML = "";
 
-  const r = await fetch("/api/pedo", {
-    method: "POST",
-    headers: { "Content-Type":"application/json" },
-    body: JSON.stringify({ email })
-  });
+  const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email })
+})
+
 
   const d = await r.json();
 
