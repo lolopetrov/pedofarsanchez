@@ -1,39 +1,118 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>PEDOFARSÁNCHEZ – Protesta Memética</title>
+<title>PedoSánchez – Protesta Memética Global</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  body { font-family: Arial; text-align:center; background:#111; color:white; padding:40px; }
-  #contador { font-size: 2rem; margin-top:20px; }
-  input, button { padding:10px; font-size:1rem; margin:5px; }
-  #msg { margin-top:15px; color:#0f0; }
-  #err { margin-top:15px; color:#f33; }
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #111;
+    color: white;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #ff4444;
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #ffa500;
+  }
+
+  #contador {
+    font-size: 2.2rem;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #00eaff;
+  }
+
+  input, button {
+    padding: 12px;
+    font-size: 1rem;
+    margin: 8px;
+    border-radius: 6px;
+    border: none;
+  }
+
+  input {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  button {
+    background: #ff4444;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #dd3333;
+  }
+
+  #msg { margin-top: 15px; color: #00ff88; }
+  #err { margin-top: 15px; color: #ff5555; }
+
+  .pump-box {
+    background: #222;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 10px;
+    border: 1px solid #444;
+  }
+
+  a.pump-link {
+    color: #00aaff;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+  }
 </style>
 </head>
+
 <body>
 
-<h1>El Despresidente del Desgobierno de Esepeña</h1>
-<p>Protesta pacífica, irónica y memética.</p>
+<h1>¡Tírate un PedoSánchez!</h1>
+<p>Protesta pacífica, irónica y memética.<br>
+Cada email válido suma un <strong>PedoSánchez global</strong>.</p>
 
-<img src="pedofarsanchez.png" alt="meme" style="width:300px;margin:20px">
+<img src="pedofarsanchez.png" alt="meme" style="width:300px;margin:20px;border-radius:10px;">
 
-<h2>Deja tu protesta</h2>
-<p>Cada email válido suma un Pedo global.</p>
+<h2>Deja tu PedoSánchez</h2>
+<p>Cada email válido = 1 PedoSánchez global. Vamos a tufar al Pedo FarSánchez.</p>
 
 <input type="email" id="email" placeholder="Introduce email válido">
-<button onclick="enviar()">Enviar</button>
+<button onclick="enviar()">Tirarse un PedoSánchez</button>
 
-<div id="contador">Pedo número: ...</div>
+<div id="contador">PedoSánchez número: ...</div>
 <div id="msg"></div>
 <div id="err"></div>
 
+<div class="pump-box">
+  <h2>🚀 Pump PedoSánchez</h2>
+  <p>Cuando el enlace esté disponible, lo pondremos aquí:</p>
+
+  <!-- CAMBIA ESTE LINK CUANDO TENGAS EL PUMP.FUN -->
+  <a class="pump-link" href="#" target="_blank">🔗 Enlace a pump.fun (próximamente)</a>
+
+  <p style="margin-top:15px;font-size:14px;color:#bbb;">
+    Objetivo: superar la bonding curve y dejar un tufazo histórico.
+  </p>
+</div>
+
 <script>
 async function cargarContador() {
-  const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
-  const d = await r.json();
-  document.getElementById("contador").innerText = "Pedo número: " + d.contador;
+  try {
+    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
+    const d = await r.json();
+    document.getElementById("contador").innerText = "PedoSánchez número: " + d.contador;
+  } catch (e) {
+    document.getElementById("contador").innerText = "Error cargando contador";
+  }
 }
 
 async function enviar() {
@@ -41,20 +120,23 @@ async function enviar() {
   document.getElementById("msg").innerHTML = "";
   document.getElementById("err").innerHTML = "";
 
-  const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email })
-})
+  try {
+    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
 
+    const d = await r.json();
 
-  const d = await r.json();
-
-  if (d.error) {
-    document.getElementById("err").innerText = d.error;
-  } else {
-    document.getElementById("msg").innerText = "¡Protesta registrada!";
-    cargarContador();
+    if (d.error) {
+      document.getElementById("err").innerText = d.error;
+    } else {
+      document.getElementById("msg").innerText = "¡Te tiraste un PedoSánchez!";
+      cargarContador();
+    }
+  } catch (e) {
+    document.getElementById("err").innerText = "Error de conexión con el servidor";
   }
 
   document.getElementById("email").value = "";
