@@ -5,16 +5,22 @@
 <title>PedoSánchez – Protesta Memética Global</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- SEO PRINCIPAL -->
+<meta name="description" content="Proyecto satírico y memecoin humorístico. Sube al contador global y participa en el experimento social del tufazo digital.">
+<meta name="keywords" content="memecoin, sátira, humor, solana, pumpfun, blockchain, protesta digital, token, crypto meme">
+<link rel="canonical" href="https://pedofarsanchez.xyz">
+
 <!-- FAVICON -->
 <link rel="icon" href="pedofarsanchez.png" type="image/png">
 
-<!-- OPEN GRAPH PARA X/TWITTER -->
+<!-- OPEN GRAPH PARA REDES -->
 <meta property="og:title" content="PedoSánchez – Protesta Memética Global">
-<meta property="og:description" content="Tírate un PedoSánchez y suma al contador global. El meme manda.">
+<meta property="og:description" content="Tírate un PedoSánchez y suma al contador global. Proyecto humorístico y satírico basado en un memecoin.">
 <meta property="og:image" content="https://pedofarsanchez.xyz/pedofarsanchez.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://pedofarsanchez.xyz">
+<meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
@@ -106,6 +112,12 @@
     background: #0070cc;
   }
 
+  footer {
+    margin-top: 60px;
+    color: #777;
+    font-size: 13px;
+  }
+
   @media (max-width: 600px) {
     h1 { font-size: 26px; }
     #contador { font-size: 1.8rem; }
@@ -134,7 +146,7 @@ Cada email válido suma un <strong>PedoSánchez global</strong>.</p>
 
 <div class="pump-box">
   <h2>🚀 Pump PedoSánchez</h2>
-  <p>Pump oficial del memecoin PedoSánchez:</p>
+  <p>Pump oficial del memecoin:</p>
 
   <a class="pump-link" id="pumpLink" 
      href="https://pump.fun/coin/DJAmwAuhCyRQ7oecp2Xbi7xg7ru78nVcM81Tj688pump"
@@ -153,7 +165,7 @@ Cada email válido suma un <strong>PedoSánchez global</strong>.</p>
 
 <div class="x-box">
   <h2>Síguenos en X (Twitter)</h2>
-  <p>Actualizaciones, memes y coordinación del Pump.</p>
+  <p>Actualizaciones, memes y novedades del experimento.</p>
 
   <a class="x-link" href="https://x.com/pedofarsanchez" target="_blank">
      🔗 Cuenta oficial de PedoSánchez en X
@@ -166,18 +178,17 @@ Cada email válido suma un <strong>PedoSánchez global</strong>.</p>
   <h2 style="color:#ffa500; text-align:center;">❓ Mini-FAQ de PedoSánchez</h2>
 
   <p><strong>🟠 ¿Qué es PedoSánchez?</strong><br>
-  Un memecoin humorístico y una protesta pacífica. Cada email que envías en la web suma un <strong>PedoSánchez global</strong> al contador.</p>
+  Un proyecto satírico y un memecoin humorístico. Cada email enviado suma un <strong>PedoSánchez global</strong> al contador.</p>
 
   <p><strong>💨 ¿Qué significa “tirarse un PedoSánchez”?</strong><br>
-  Introduces tu email, se suma +1 al contador.  
-  No cuesta nada y ayuda a inflar el tufazo global.</p>
+  Introduces tu email, se suma +1 al contador. No cuesta nada y forma parte del experimento social del tufazo digital.</p>
 
   <p><strong>🚀 ¿Qué es el Pump?</strong><br>
-  La fase donde los participantes pueden comprar el token en Pump.fun para empujar la <strong>bonding curve</strong> hasta que se gradúe.</p>
+  Es la fase donde los participantes pueden comprar el token en Pump.fun para empujar la <strong>bonding curve</strong>.</p>
 
   <p><strong>💸 ¿Tengo que pagar para participar?</strong><br>
   No para sumar al contador.  
-  Sí, si quieres pumpear el token como cualquier memecoin en Solana.</p>
+  Sí, si quieres pumpear el token como cualquier memecoin de Solana.</p>
 
   <p><strong>🌐 Web oficial:</strong><br>
     <a href="https://pedofarsanchez.xyz" style="color:#00aaff;">pedofarsanchez.xyz</a>
@@ -192,16 +203,16 @@ Cada email válido suma un <strong>PedoSánchez global</strong>.</p>
   <p><strong>🐦 X oficial:</strong><br>
     <a href="https://x.com/pedofarsanchez" style="color:#1DA1F2;">@pedofarsanchez</a>
   </p>
-
-  <p><strong>🤡 ¿Y esto para qué sirve?</strong><br>
-  Para nada.  
-  O para todo, si España decide convertirlo en el memecoin definitivo del tufazo nacional.</p>
 </div>
+
+<footer>
+  Proyecto satírico y humorístico. No representa hechos reales ni afirmaciones sobre personas reales.
+</footer>
 
 <script>
 async function cargarContador() {
   try {
-    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
+    const r = await fetch("https://pedofarsanchez-backebackend.onrender.com/api/contador");
     const d = await r.json();
 
     const contadorDiv = document.getElementById("contador");
