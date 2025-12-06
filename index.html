@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <title>PedoSánchez – Protesta Memética Global</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FAVICON -->
+<link rel="icon" href="pedofarsanchez.png" type="image/png">
+
+<!-- OPEN GRAPH para X/Twitter -->
+<meta property="og:title" content="PedoSánchez – Protesta Memética Global">
+<meta property="og:description" content="Tírate un PedoSánchez y suma al contador global. El meme manda.">
+<meta property="og:image" content="https://pedofarsanchez.xyz/pedofarsanchez.png">
+<meta property="og:url" content="https://pedofarsanchez.xyz">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -25,10 +36,17 @@
   }
 
   #contador {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     margin-top: 20px;
     font-weight: bold;
     color: #00eaff;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  /* ANIMACIÓN AL SUBIR EL CONTADOR */
+  .contador-anim {
+    transform: scale(1.25);
+    color: #00ffaa;
   }
 
   input, button {
@@ -57,7 +75,7 @@
   #msg { margin-top: 15px; color: #00ff88; }
   #err { margin-top: 15px; color: #ff5555; }
 
-  .pump-box {
+  .pump-box, .x-box {
     background: #222;
     padding: 20px;
     margin-top: 40px;
@@ -65,11 +83,34 @@
     border: 1px solid #444;
   }
 
-  a.pump-link {
-    color: #00aaff;
+  a.pump-link, a.x-link {
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
+  }
+
+  a.pump-link { color: #00aaff; }
+  a.x-link { color: #1DA1F2; }
+
+  /* Estilo del botón "Copiar enlace" */
+  .copy-btn {
+    margin-top: 10px;
+    background: #0088ff;
+    border-radius: 6px;
+    padding: 10px 15px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background: #0070cc;
+  }
+
+  /* Ajustes móvil */
+  @media (max-width: 600px) {
+    h1 { font-size: 26px; }
+    #contador { font-size: 1.8rem; }
+    .pump-box, .x-box { padding: 15px; }
   }
 </style>
 </head>
@@ -96,38 +137,41 @@ Cada email válido suma un <strong>PedoSánchez global</strong>.</p>
   <h2>🚀 Pump PedoSánchez</h2>
   <p>Cuando el enlace esté disponible, lo pondremos aquí:</p>
 
-  <!-- CAMBIA ESTE LINK CUANDO TENGAS EL PUMP.FUN -->
-  <a class="pump-link" href="#" target="_blank">🔗 Enlace a pump.fun (próximamente)</a>
+  <a class="pump-link" id="pumpLink" href="#" target="_blank">
+    🔗 Enlace a pump.fun (próximamente)
+  </a>
+
+  <div class="copy-btn" onclick="copiarPump()">
+    📋 Copiar enlace de Pump
+  </div>
 
   <p style="margin-top:15px;font-size:14px;color:#bbb;">
     Objetivo: superar la bonding curve y dejar un tufazo histórico.
   </p>
 </div>
 
-  <div class="x-box" style="
-  margin-top:40px;
-  padding:20px;
-  background:#222;
-  border-radius:10px;
-  border:1px solid #444;
-">
+<div class="x-box">
   <h2>Síguenos en X (Twitter)</h2>
   <p>Actualizaciones, memes y coordinación del Pump.</p>
 
-  <!-- PON AQUÍ TU ENLACE REAL A X -->
-  <a href="https://x.com/TUUSUARIO" target="_blank" 
-     style="color:#1DA1F2;font-size:20px;font-weight:bold;text-decoration:none;">
-     🔗 Ir a la cuenta oficial de PedoSánchez en X
+  <a class="x-link" href="https://x.com/TUUSUARIO" target="_blank">
+     🔗 Cuenta oficial de PedoSánchez en X
   </a>
 </div>
-
 
 <script>
 async function cargarContador() {
   try {
     const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
     const d = await r.json();
-    document.getElementById("contador").innerText = "PedoSánchez número: " + d.contador;
+
+    const contadorDiv = document.getElementById("contador");
+
+    // Animación al actualizar
+    contadorDiv.classList.add("contador-anim");
+    setTimeout(() => contadorDiv.classList.remove("contador-anim"), 250);
+
+    contadorDiv.innerText = "PedoSánchez número: " + d.contador;
   } catch (e) {
     document.getElementById("contador").innerText = "Error cargando contador";
   }
@@ -158,6 +202,13 @@ async function enviar() {
   }
 
   document.getElementById("email").value = "";
+}
+
+// Botón copiar enlace pump.fun
+function copiarPump() {
+  const link = document.getElementById("pumpLink").href;
+  navigator.clipboard.writeText(link);
+  alert("Enlace copiado: " + link);
 }
 
 cargarContador();
