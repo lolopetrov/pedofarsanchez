@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>PedoSánchez – Protesta Memética Global</title>
+<title>Pedo Sánchez – Protesta Memética Global</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="description" content="Proyecto satírico y memecoin humorístico. Sube al contador global y participa en el experimento social del tufazo digital.">
@@ -111,10 +111,10 @@ Cada clic suma un <strong>Pedo Sánchez global</strong>.</p>
 <div class="faq-box" style="text-align:left; max-width:700px; margin:auto;">
   <h2 style="text-align:center;">❓ Mini-FAQ</h2>
 
-  <p><strong>¿Qué es PedoSánchez?</strong><br>
+  <p><strong>¿Qué es Pedo Sánchez?</strong><br>
   Proyecto satírico y memecoin humorístico.</p>
 
-  <p><strong>¿Qué significa tirarse un PedoSánchez?</strong><br>
+  <p><strong>¿Qué significa tirarse un Pedo Sánchez?</strong><br>
   Pulsas el botón y sumas +1 al contador global.</p>
 
   <p><strong>¿Tengo que pagar?</strong><br>
@@ -130,7 +130,7 @@ async function cargarContador() {
   try {
     const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
     const d = await r.json();
-    document.getElementById("contador").innerText = "PedoSánchez número: " + d.contador;
+    document.getElementById("contador").innerText = "Tufazo Pedo Sánchez número: " + d.contador;
   } catch {
     document.getElementById("contador").innerText = "Error cargando contador";
   }
