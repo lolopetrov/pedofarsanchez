@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pedo Sánchez – Protesta Memética Global</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Proyecto satírico y memecoin humorístico. Sube al contador global y participa en el experimento social del tufazo digital.">
+<meta name="keywords" content="memecoin, sátira, humor, solana, pumpfun, blockchain, protesta digital, token, crypto meme">
+<link rel="canonical" href="https://pedofarsanchez.xyz">
+
+<link rel="icon" href="pedofarsanchez.png" type="image/png">
+
+<meta property="og:title" content="PedoSánchez – Protesta Memética Global">
+<meta property="og:description" content="Tírate un PedoSánchez y suma al contador global. Proyecto humorístico y satírico basado en un memecoin.">
+<meta property="og:image" content="https://pedofarsanchez.xyz/pedofarsanchez.png">
+<meta property="og:url" content="https://pedofarsanchez.xyz">
+<meta property="og:type" content="website">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #111;
+  color: white;
+  padding: 40px 20px;
+}
+h1 { font-size: 32px; color: #ff4444; }
+h2 { margin-top: 30px; color: #ffa500; }
+
+#contador {
+  font-size: 2.4rem;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #00eaff;
+}
+
+button {
+  padding: 14px 22px;
+  font-size: 1.1rem;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #ff4444;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover { background: #dd3333; }
+
+#msg { margin-top: 15px; color: #00ff88; }
+#err { margin-top: 15px; color: #ff5555; }
+
+.pump-box, .x-box, .faq-box {
+  background: #222;
+  padding: 20px;
+  margin-top: 40px;
+  border-radius: 10px;
+  border: 1px solid #444;
+}
+
+a { color: #00aaff; text-decoration: none; font-weight: bold; }
+
+footer {
+  margin-top: 60px;
+  color: #777;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>¡Tírate un Pedo Sánchez!</h1>
+<p>Protesta pacífica y memética.<br>
+Cada clic suma un <strong>Pedo Sánchez global</strong>.</p>
+
+<img src="pedofarsanchez.png" alt="meme" style="width:300px;margin:20px;border-radius:10px;">
+
+<h2>Deja tu Pedo Sánchez</h2>
+<p>Sin email. Sin registro. Un clic = un tufazo.</p>
+
+<!-- BOTÓN NORMAL -->
+<button onclick="enviar()">💨 Tirarse un Pedo Sánchez</button>
+
+<!-- BOTÓN ANÓNIMO -->
+<button onclick="pedoAnonimo()" style="background:#555;">
+  💨 Pedo Sánchez anónimo
+</button>
+
+<div id="contador">Pedo Sánchez número: ...</div>
+<div id="msg"></div>
+<div id="err"></div>
+
+<div class="pump-box">
+  <h2>🚀 Pump PedoSánchez</h2>
+
+  <a id="pumpLink" 
+     href="https://pump.fun/coin/DJAmwAuhCyRQ7oecp2Xbi7xg7ru78nVcM81Tj688pump"
+     target="_blank">
+    🔗 Pump PEDOSÁNCHEZ en pump.fun
+  </a>
+
+  <div style="margin-top:15px;">
+    Objetivo: superar la bonding curve y dejar un tufazo histórico.
+  </div>
+</div>
+
+<div class="x-box">
+  <h2>Síguenos en X</h2>
+  <a href="https://x.com/pedofarsanchez" target="_blank">
+     🔗 Cuenta oficial en X
+  </a>
+</div>
+
+<div class="faq-box" style="text-align:left; max-width:700px; margin:auto;">
+  <h2 style="text-align:center;">❓ Mini-FAQ</h2>
+
+  <p><strong>¿Qué es Pedo Sánchez?</strong><br>
+  Proyecto satírico y memecoin humorístico.</p>
+
+  <p><strong>¿Qué significa tirarse un Pedo Sánchez?</strong><br>
+  Pulsas el botón y sumas +1 al contador global.</p>
+
+  <p><strong>¿Tengo que pagar?</strong><br>
+  No. El contador es gratis. El pump es opcional.</p>
+</div>
+
+<footer>
+Proyecto satírico y humorístico.
+</footer>
+
+<script>
+async function cargarContador() {
+  try {
+    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
+    const d = await r.json();
+    document.getElementById("contador").innerText = "Tufazo Pedo Sánchez número: " + d.contador;
+  } catch {
+    document.getElementById("contador").innerText = "Error cargando contador";
+  }
+}
+
+async function enviar() {
+  document.getElementById("msg").innerHTML = "";
+  document.getElementById("err").innerHTML = "";
+
+  try {
+    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({})
+    });
+
+    const d = await r.json();
+
+    if (d.error) {
+      document.getElementById("err").innerText = d.error;
+    } else {
+      document.getElementById("msg").innerText = "💨 ¡Tufazo registrado!";
+      cargarContador();
+    }
+  } catch {
+    document.getElementById("err").innerText = "Error de conexión";
+  }
+}
+
+async function pedoAnonimo() {
+  document.getElementById("msg").innerHTML = "";
+  document.getElementById("err").innerHTML = "";
+
+  try {
+    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "anonimo@pedosanchez.xyz" })
+    });
+
+    const d = await r.json();
+
+    if (d.error) {
+      document.getElementById("err").innerText = d.error;
+    } else {
+      document.getElementById("msg").innerText = "💨 Pedo Sánchez anónimo liberado.";
+      cargarContador();
+    }
+  } catch {
+    document.getElementById("err").innerText = "Error de conexión";
+  }
+}
+
+// 🚨 PEDO AUTOMÁTICO POR SCROLL 🚨
+let pedoScrollRegistrado = false;
+
+window.addEventListener("scroll", async () => {
+  if (pedoScrollRegistrado) return;
+
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const docHeight = document.documentElement.scrollHeight;
+
+  if (scrollTop + windowHeight >= docHeight - 10) {
+    pedoScrollRegistrado = true;
+
+    try {
+      await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: "scroll@pedosanchez.xyz" })
+      });
+
+      document.getElementById("msg").innerText =
+        "💨 Has llegado al fondo. Pedo automático registrado.";
+
+      cargarContador();
+    } catch {}
+  }
+});
+
+cargarContador();
+</script>
+
+</body>
+</html>
