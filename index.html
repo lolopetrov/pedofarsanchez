@@ -81,13 +81,8 @@ Cada clic suma un <strong>Pedo Sánchez global</strong>.</p>
 <h2>Deja tu Pedo Sánchez</h2>
 <p>Sin email. Sin registro. Un clic = un tufazo.</p>
 
-<!-- BOTÓN NORMAL -->
+<!-- ÚNICO BOTÓN PRINCIPAL -->
 <button onclick="enviar()">💨 Tirarse un Pedo Sánchez</button>
-
-<!-- BOTÓN ANÓNIMO -->
-<button onclick="pedoAnonimo()" style="background:#555;">
-  💨 Pedo Sánchez anónimo
-</button>
 
 <div id="contador">Pedo Sánchez número: ...</div>
 <div id="msg"></div>
@@ -136,7 +131,8 @@ async function cargarContador() {
   try {
     const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/contador");
     const d = await r.json();
-    document.getElementById("contador").innerText = "Tufazo Pedo Sánchez número: " + d.contador;
+    document.getElementById("contador").innerText =
+      "Tufazo Pedo Sánchez número: " + d.contador;
   } catch {
     document.getElementById("contador").innerText = "Error cargando contador";
   }
@@ -166,31 +162,7 @@ async function enviar() {
   }
 }
 
-async function pedoAnonimo() {
-  document.getElementById("msg").innerHTML = "";
-  document.getElementById("err").innerHTML = "";
-
-  try {
-    const r = await fetch("https://pedofarsanchez-backend.onrender.com/api/pedo", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: "anonimo@pedosanchez.xyz" })
-    });
-
-    const d = await r.json();
-
-    if (d.error) {
-      document.getElementById("err").innerText = d.error;
-    } else {
-      document.getElementById("msg").innerText = "💨 Pedo Sánchez anónimo liberado.";
-      cargarContador();
-    }
-  } catch {
-    document.getElementById("err").innerText = "Error de conexión";
-  }
-}
-
-// 🚨 PEDO AUTOMÁTICO POR SCROLL 🚨
+// 🚨 PEDO AUTOMÁTICO POR SCROLL (solo 1 vez)
 let pedoScrollRegistrado = false;
 
 window.addEventListener("scroll", async () => {
