@@ -67,6 +67,10 @@ footer {
   color: #777;
   font-size: 13px;
 }
+.video-container {
+  max-width: 720px;
+  margin: 20px auto;
+}
 </style>
 </head>
 
@@ -78,10 +82,32 @@ Cada clic suma un <strong>Pedo Sánchez global</strong>.</p>
 
 <img src="pedofarsanchez.png" alt="meme" style="width:300px;margin:20px;border-radius:10px;">
 
+<!-- 🎬 VIDEO INCRUSTADO -->
+<h2>💨 El Tufazo Oficial</h2>
+<div class="video-container">
+  <iframe 
+    width="100%" 
+    height="405"
+    src="https://www.youtube.com/embed/Ew-pv_NIkj0"
+    title="Tufazo PedoSánchez"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    style="border-radius:10px;">
+  </iframe>
+
+  <p style="margin-top:10px; color:#aaa; font-size:14px;">
+    👉 Ver en YouTube:  
+    <a href="https://www.youtube.com/watch?v=Ew-pv_NIkj0" target="_blank">
+      Abrir vídeo original
+    </a>
+  </p>
+</div>
+<!-- FIN VIDEO -->
+
 <h2>Deja tu Pedo Sánchez</h2>
 <p>Sin email. Sin registro. Un clic = un tufazo.</p>
 
-<!-- ÚNICO BOTÓN PRINCIPAL -->
 <button onclick="enviar()">💨 Tirarse un Pedo Sánchez</button>
 
 <div id="contador">Pedo Sánchez número: ...</div>
@@ -162,7 +188,7 @@ async function enviar() {
   }
 }
 
-// 🚨 PEDO AUTOMÁTICO POR SCROLL (solo 1 vez)
+// PEDO AUTOMÁTICO POR SCROLL (solo 1 vez)
 let pedoScrollRegistrado = false;
 
 window.addEventListener("scroll", async () => {
